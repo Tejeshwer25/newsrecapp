@@ -1,0 +1,56 @@
+/* Common Styles */
+.navbar, .navbar__authLinks {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar__brandName > h3, .navbar__authLinks > *, .navbar__authLinks > button {
+    cursor: pointer;
+}
+
+
+.navbar {
+  padding: 1rem 2rem;
+
+  background: var(--navbarBackgroundColor);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 0px 0px 30px 30px;
+}
+
+.navbar__brandName > h3 {
+    font-size: var(--heading1-fontSize);
+}
+
+.navbar__authLinks {
+  min-width: 10rem;
+  font-size: var(--heading3-fontSize);
+}
+
+.navbar__authLinks > * {
+    margin: 0rem 1.5rem;
+    font-weight: 500;
+}
+
+.navbar__authLinks > p {
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+.navbar__authLinks > p:hover {
+    border-color: var(--blackColor);
+}
+
+.navbar__authLinks > button {
+    padding: 0.5rem 1.5rem;
+    background-color: transparent;
+    border: 1px solid var(--blackColor);
+
+    font-size: var(--paragraph-fontSize);
+
+    transition: all 0.3s ease-in-out;
+}
+
+.navbar__authLinks > button:hover{
+    background-color: var(--blackColor);
+    color: var(--whiteColor);
+}
