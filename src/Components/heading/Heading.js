@@ -1,6 +1,8 @@
+import styles from './Heading.module.css';
+
 const Heading = ({heading}) => {
   return (
-    <div>
+    <div className={styles.headingContainer}>
         <h3>{heading}</h3>
     </div>
   )

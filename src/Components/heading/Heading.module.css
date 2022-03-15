@@ -1,0 +1,3 @@
+.headingContainer > h3{
+    font-size: var(--heading1-fontSize);
+}

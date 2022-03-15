@@ -1,0 +1,40 @@
+.card {
+  width: 28%;
+
+  margin: 1rem 0rem;
+
+  background: #f6f6f6;
+  box-shadow: 4px 4px 25px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+}
+
+.cardImage,
+.cardImage > a > img {
+  width: 100% !important;
+  height: 15rem !important;
+
+  border-radius: 15px;
+
+  transition: all 0.2s ease-in-out;
+}
+
+.cardImage > a > img:hover {
+    transform: scale(1.01);
+    opacity: 0.85;
+}
+
+.cardBody {
+    padding: 0.5rem 0.75rem;
+}
+
+.cardBody > * {
+    margin-bottom: 0.5rem;
+}
+
+.cardBody > h3 {
+    font-size: var(--heading3-fontSize);
+}
+
+.cardBody > p {
+    font-size: var(--paragraph-fontSize);
+}

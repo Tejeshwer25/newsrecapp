@@ -1,11 +1,16 @@
 import styles from './CarouselItem.module.css';
 
-const CarouselItem = ({img, text}) => {
+const CarouselItem = ({item}) => {
+
   return (
     <div className={styles.carouselItem}>
-        <img src={img} alt="" />
+        <img src={item.image} alt="" />
 
-        <p>{text}</p>
+        <div>
+          <h3>{item.title}</h3>
+          <p>{item.description}</p>
+          <a href={item.url}>Read More on {item.source.name}</a>
+        </div>
     </div>
   )
 }

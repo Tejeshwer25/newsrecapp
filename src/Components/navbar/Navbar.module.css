@@ -42,8 +42,9 @@
 
 .navbar__authLinks > button {
     padding: 0.5rem 1.5rem;
-    background-color: transparent;
+    background-color: var(--navbarButtonBackgroundColor);
     border: 1px solid var(--blackColor);
+    color: var(--navbarBackgroundColor);
 
     font-size: var(--paragraph-fontSize);
 
@@ -51,6 +52,6 @@
 }
 
 .navbar__authLinks > button:hover{
-    background-color: var(--blackColor);
-    color: var(--whiteColor);
+    background-color: var(--navbarBackgroundColor);
+    color: var(--navbarButtonBackgroundColor);
 }
