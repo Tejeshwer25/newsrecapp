@@ -5,6 +5,7 @@
   --navbarBackgroundColor: #f9f9f9;
   --navbarButtonBackgroundColor: #44403C;
   --bannerbackgroundColor: #EEF0F3;
+  --formHeadingColor: #F96E46;
 
   --heading1-fontSize: calc(1.5rem + 0.15vw);
   --heading2-fontSize: calc(1.25rem + 0.15vw);
@@ -16,4 +17,5 @@
 * {
   margin: 0rem;
   padding: 0rem;
+  box-sizing: border-box;
 }

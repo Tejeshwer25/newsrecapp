@@ -1,7 +1,16 @@
 import {useState, useEffect} from 'react'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from 'react-router-dom';
+
 
 import './App.css';
+
 import WelcomePage from './Pages/WelcomePage';
+import Login from './Pages/Login';
+import Register from './Pages/SignUp'
 
 function App() {
 
@@ -14,9 +23,17 @@ function App() {
   }, [])
 
   return (
+    <Router>
       <div className="app">
-        <WelcomePage data={apiData.articles}/>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+
+          <Route path="/register" element={<Register />} />
+
+          <Route path="/" element={<WelcomePage data={apiData.articles}/>} />
+        </Routes>
       </div>
+    </Router>
   );
 }
 

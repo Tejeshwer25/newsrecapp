@@ -1,0 +1,13 @@
+.formHero {
+    width: 30%
+}
+
+.formHero > img {
+    width: 100%;
+}
+
+@media (max-width: 700px) {
+    .formHero {
+        display: none
+    }
+}

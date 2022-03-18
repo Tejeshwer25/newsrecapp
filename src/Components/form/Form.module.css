@@ -1,0 +1,97 @@
+.form {
+    width: 50%;
+
+    background-color: var(--navbarBackgroundColor);
+    border-radius: 40px;
+
+    padding: 5rem 3rem;
+    margin-top: 4rem;
+
+    filter: drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.1));
+    backdrop-filter: blur(10px);
+}
+
+.form > form > p{
+    font-size: var(--paragraph-fontSize);
+    margin-bottom: 1rem;
+    margin-top: -0.5rem;
+
+    cursor: pointer;
+}
+
+.formTitle > p {
+    color: var(--formHeadingColor);
+
+    font-size: var(--heading3-fontSize);
+    font-weight: 600;
+
+    margin-bottom: 0.5rem;
+}
+
+.formTitle > h3 {
+    font-size: var(--heading1-fontSize);
+
+    margin-bottom: 1.5rem;
+}
+
+.formGroup {
+    margin-bottom: 1rem;
+}
+
+.formGroup > label {
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.formGroup > input {
+    width: 100%;
+    padding: 0.75rem 0.5rem;
+    border-radius: 5px;
+    
+    background-color: var(--bannerbackgroundColor);
+    outline: none;
+    border: none;
+}
+
+.form > form > button {
+    width: 100%;
+    
+    margin-top: 1rem;
+    padding: 0.5rem;
+    font-size: var(--heading3-fontSize);
+    font-weight: 600;
+
+    color: var(--whiteColor);
+    background-color: var(--formHeadingColor);
+
+    outline: none;
+    border: none;
+
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.form > form > button:hover {
+    opacity: 0.85;
+}
+
+.form > p {
+    margin-top: 1rem;
+    font-size: var(--paragraph-fontSize);
+}
+
+.form > p > a {
+    color: var(--blackColor);
+
+    font-weight: 600;
+
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+@media(max-width: 700px) {
+    .form {
+        width: 90%;
+    }
+}

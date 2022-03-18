@@ -43,3 +43,11 @@
 .carouselItem > div > a:hover {
     color: var(--navbarBackgroundColor)
 }
+
+
+@media (max-width: 500px) {
+    .carouselItem > div {
+        top: 52.9%;
+        height: 17.5rem;
+    }
+}

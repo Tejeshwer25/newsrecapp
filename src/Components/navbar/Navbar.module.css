@@ -22,25 +22,30 @@
     font-size: var(--heading1-fontSize);
 }
 
-.navbar__authLinks {
+.navbar__authLinks, .navbar__mobileLinkAction {
   min-width: 10rem;
   font-size: var(--heading3-fontSize);
 }
 
-.navbar__authLinks > * {
+.navbar__authLinks > *, .navbar__mobileLinkAction > * {
     margin: 0rem 1.5rem;
     font-weight: 500;
 }
 
-.navbar__authLinks > p {
+.navbar__authLinks > p > a, .navbar__mobileLinkAction > p > a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.navbar__authLinks > p, .navbar__mobileLinkAction > p {
     border-bottom: 2px solid transparent;
     transition: all 0.2s ease-in-out;
 }
-.navbar__authLinks > p:hover {
+.navbar__authLinks > p:hover, .navbar__mobileLinkAction > p:hover {
     border-color: var(--blackColor);
 }
 
-.navbar__authLinks > button {
+.navbar__authLinks button, .navbar__mobileLinkAction button {
     padding: 0.5rem 1.5rem;
     background-color: var(--navbarButtonBackgroundColor);
     border: 1px solid var(--blackColor);
@@ -49,9 +54,55 @@
     font-size: var(--paragraph-fontSize);
 
     transition: all 0.3s ease-in-out;
+    cursor: pointer;
 }
 
-.navbar__authLinks > button:hover{
+.navbar__authLinks button:hover, .navbar__mobileLinkAction button:hover {
     background-color: var(--navbarBackgroundColor);
     color: var(--navbarButtonBackgroundColor);
+}
+
+.navbar__mobileLink {
+    display: none;
+}
+
+@media (max-width: 500px) {
+    .navbar__authLinks {
+        display: none;
+    }   
+
+    .navbar__mobileLink {
+        display: block;
+        width: 2rem;
+        position: relative;
+    }
+
+    .navbar__mobileLink > div, .navbar__mobileLink > div > img {
+        width: 100%;
+        cursor: pointer;
+    }
+
+    .navbar__mobileLinkAction {
+        position: absolute;
+        top: 225%;
+        left: -105%;
+        transform: translate(-50%, -50%);
+
+        background: var(--bannerbackgroundColor);
+        padding: 1rem 0rem;
+        border-radius: 5px;
+
+        z-index: 10;
+    }
+
+    .navbar__mobileLinkAction > *:first-child {
+        margin-bottom: 1rem;
+        width: max-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .navbar__mobileLinkAction button {
+        width: 70%
+    }
 }

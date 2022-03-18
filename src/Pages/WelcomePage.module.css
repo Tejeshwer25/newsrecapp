@@ -5,3 +5,22 @@
     flex-wrap: wrap;
     justify-content: space-around;
 }
+
+
+@media (max-width: 900px) {
+    .newsCards > div {
+        width: 45%;
+    }
+}
+
+@media (max-width: 500px) {
+    .newsCards > div {
+        width: 100%;
+    }
+}
+
+@media (min-width: 1700px) {
+    .newsCards > div {
+        width: 22%;
+    }
+}
