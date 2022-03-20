@@ -4,7 +4,7 @@ import Form from "../Components/form/Form";
 import FormHero from '../Components/formHero/FormHero';
 import HomeNavigator from "../Components/homeNavigator/HomeNavigator";
 
-const SignUp = () => {
+const SignUp = ({setUserLoggedIn}) => {
 
   const [userdata, setUserData] = useState({
     name: "",
@@ -21,7 +21,7 @@ const SignUp = () => {
         justifyContent: 'space-around',
         alignItems: 'center',
       }}>
-          <Form userData={userdata} setUserData={setUserData} formType="Register"/>
+          <Form userData={userdata} setUserData={setUserData} setUserLoggedIn={setUserLoggedIn} formType="Register"/>
         
 
         <FormHero />

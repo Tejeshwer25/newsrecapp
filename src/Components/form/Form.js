@@ -2,11 +2,19 @@ import {Link} from 'react-router-dom';
 
 import styles from "./Form.module.css";
 
-const Form = ({userData, setUserData, formType}) => {
+const Form = ({userData, setUserData, setUserLoggedIn, formType}) => {
+
+    const submitForm = (e) => {
+        e.preventDefault();
+        setUserLoggedIn(true);
+
+        console.log(e)
+    }
+
     return (
         <div className={styles.form}>
             {formType==="Login" 
-                ? <form>
+                ? <form onSubmit={submitForm}>
                     <div className={styles.formTitle}>
                         <p>News Portal</p>
                         <h3>Login</h3>
@@ -34,10 +42,10 @@ const Form = ({userData, setUserData, formType}) => {
 
                     <p>Forgot Password?</p>
 
-                    <button type="submit">Sign IN</button>
+                    <button onSubmit={submitForm}>Sign IN</button>
                 </form> 
 
-                : <form>
+                : <form onSubmit={submitForm}>
                     <div className={styles.formTitle}>
                         <p>News Portal</p>
                         <h3>Register</h3>
@@ -73,7 +81,7 @@ const Form = ({userData, setUserData, formType}) => {
                         />
                     </div>
 
-                    <button type="submit">Register</button>
+                    <button onSubmit={submitForm}>Register</button>
                 </form>
             }
             
