@@ -1,8 +1,15 @@
-import {useState} from 'react';
+import {useState, useContext } from 'react';
+import {
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import {Navigate} from "react-router-dom"
 
 import Form from '../Components/form/Form';
 import FormHero from '../Components/formHero/FormHero';
 import HomeNavigator from "../Components/homeNavigator/HomeNavigator";
+
+import { auth } from "../firebase/firebase";
+import {Context} from "../Context/userContext";
 
 function Login({setUserLoggedIn}) {
 
@@ -10,9 +17,31 @@ function Login({setUserLoggedIn}) {
     email: "",
     password: "",
   })
+  const {userDetails, setUserDetails} = useContext(Context);
+
+  const login = async () => {
+    try {
+      const user = await signInWithEmailAndPassword(
+        auth,
+        userData.email,
+        userData.password,
+      );
+
+      console.log(auth);
+
+      setUserDetails({...userDetails, email: userData.email});
+      sessionStorage.setItem("email", userData.email);
+
+    } catch (error) {
+      console.log(error)
+    }
+
+  };
 
   return (
     <>
+    { userDetails.email === "" ? 
+      <>
       <HomeNavigator />
 
       <div style={{
@@ -20,12 +49,15 @@ function Login({setUserLoggedIn}) {
         justifyContent: 'space-around',
         alignItems: 'center',
       }}>
-          <Form userData={userData} setUserData={setUserData} setUserLoggedIn={setUserLoggedIn} formType="Login"/>
-        
+        <Form userData={userData} setUserData={setUserData} setUserLoggedIn={setUserLoggedIn} onSubmit={login} formType="Login"/>
 
         <FormHero />
       </div>
     </>
+    : 
+    <Navigate replace to="/welcome" />
+  }
+  </>
   )
 }
 

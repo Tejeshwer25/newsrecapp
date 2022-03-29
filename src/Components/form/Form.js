@@ -1,14 +1,27 @@
+import { sendPasswordResetEmail } from 'firebase/auth';
 import {Link} from 'react-router-dom';
 
 import styles from "./Form.module.css";
 
-const Form = ({userData, setUserData, setUserLoggedIn, formType}) => {
+import {auth} from '../../firebase/firebase.js'
+
+const Form = ({userData, setUserData, setUserLoggedIn, onSubmit, formType}) => {
 
     const submitForm = (e) => {
         e.preventDefault();
-        setUserLoggedIn(true);
+        onSubmit();
+    }
 
-        console.log(e)
+    const resetPassword = async (e) => {
+        if(userData.email === "") return alert("Enter your email address");
+
+        try {
+            await sendPasswordResetEmail(auth, userData.email);
+            alert("Link sent to email");
+        }
+        catch (error) {
+            alert(error)
+        }
     }
 
     return (
@@ -40,7 +53,7 @@ const Form = ({userData, setUserData, setUserLoggedIn, formType}) => {
                         />
                     </div>
 
-                    <p>Forgot Password?</p>
+                    <p onClick={resetPassword}>Forgot Password?</p>
 
                     <button onSubmit={submitForm}>Sign IN</button>
                 </form> 

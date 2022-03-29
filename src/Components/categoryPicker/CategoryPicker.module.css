@@ -44,7 +44,7 @@
 
     border: 1px solid var(--navbarButtonBackgroundColor);
     margin: 0.5rem 0rem;
-    padding: 0.25rem 0.75rem;
+    padding: 0.5rem 0rem 0.5rem 0.5rem;
     border-radius: 5px;
 
     cursor: pointer;
@@ -53,20 +53,11 @@
 .categoryLabel:hover {
     background-color: var(--navbarButtonBackgroundColor);
 }
-.categoryLabel:hover > p, .categoryLabel:hover > button, .categoryLabel:hover{
+.categoryLabel:hover{
     color: var(--whiteColor);
 }
 
-.categoryLabel > button {
-    border: none;
-    outline: none;
-    background-color: transparent;
-
-    font-size: var(--heading1-fontSize);
-    color: var(--formHeadingColor)
-}
-
-.categoryLabel > p {
+.categoryLabel {
     font-size: var(--heading3-fontSize);
     color: var(--formHeadingColor);
 

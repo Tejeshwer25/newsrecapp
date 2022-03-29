@@ -1,12 +1,15 @@
 import styles from './Cards.module.css';
 
+import noImage from '../../Assets/imageNotAvailable.png';
+
 const Cards = ({data}) => {
 
-    console.log(data)
+    console.log(data.image)
+
     return (
         <div className={styles.card}>
             <div className={styles.cardImage}>
-                <a href={data.url} target="_blank" rel="noopener noreferrer"><img src={data.image} alt=""/></a>
+                <a href={data.url} target="_blank" rel="noopener noreferrer"><img src={data.image ? data.image : noImage} alt=""/></a>
             </div>
 
             <div className={styles.cardBody}>

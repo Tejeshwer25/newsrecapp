@@ -1,7 +1,7 @@
 import CategoryLabel from "./CategoryLabel";
 import styles from "./CategoryPicker.module.css";
 
-const CategoryPicker = ({categories, categoriesChoosen, setCategoriesChoosen}) => {
+const CategoryPicker = ({categories, categoriesChoosen, setCategoriesChoosen, addCategoryToDatabase}) => {
     return (
         <div className={styles.categoryPicker}>
             <div className={styles.categoryPicker__header}>
@@ -11,7 +11,7 @@ const CategoryPicker = ({categories, categoriesChoosen, setCategoriesChoosen}) =
             </div>
 
             <div className={styles.categoryPicker__mainSecion}>
-                {categories.map(category => <CategoryLabel category={category} />)}
+                {categories.map(category => <CategoryLabel category={category} addCategoryToDatabase={addCategoryToDatabase}/>)}
             </div>
         </div>
     )

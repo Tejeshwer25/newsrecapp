@@ -1,4 +1,5 @@
-import styles from './Banner.module.css'
+import {Link} from "react-router-dom";
+import styles from './Banner.module.css';
 
 const Banner = () => {
   return (
@@ -9,7 +10,7 @@ const Banner = () => {
         news you have no interest in. What are you waiting for?
       </p>
 
-      <button className={styles.bannerButton}>Register Now</button>
+      <Link to="/register"><button className={styles.bannerButton}>Register Now</button></Link>
     </div>
   );
 };

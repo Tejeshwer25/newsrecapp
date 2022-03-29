@@ -9,6 +9,11 @@
     cursor: pointer;
 }
 
+.navbar__brandName a {
+    text-decoration: none;
+    color: inherit;
+}
+
 
 .navbar {
   padding: 1rem 2rem;
@@ -65,6 +70,69 @@
 .navbar__mobileLink {
     display: none;
 }
+
+
+/* User Chip Styling  */
+.userChip {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.25rem 0.5rem 0.25rem 0.25rem;
+    background-color: var(--navbarBackgroundColor);
+    border-radius: 30px;
+
+    border: 1px solid var(--blackColor);
+    cursor: pointer;
+}
+
+.userChip__profileImage, .userChip__userDetail > img {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.userChip__userDetail {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-left: 0.5rem;
+
+    font-size: var(--paragraph-fontSize);
+    font-weight: bold;
+}
+
+.userChip__userDetail > img {
+    width: 1rem;
+    height: 1.35rem;
+    margin-left: 0.5rem;
+    border-radius: 0%;
+    transform: rotate(90deg);
+}
+
+.userChip__navContainer {
+    position: absolute;
+    width: 100%;
+
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    background-color: var(--navbarBackgroundColor);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-top: 7.1rem;
+}
+
+.userChip__navItem > ul > li {
+    list-style: none;
+    text-align: center;
+    padding: 0.25rem 0rem
+}
+
+.userChip__navItem > ul > li > a {
+    text-decoration: none;
+    color: inherit;
+}
+
 
 @media (max-width: 500px) {
     .navbar__authLinks {
