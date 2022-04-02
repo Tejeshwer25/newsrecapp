@@ -6,7 +6,7 @@ import { set, refFromURL, onValue } from "firebase/database";
 import CategoryPicker from "../Components/categoryPicker/CategoryPicker";
 import Navbar from "../Components/navbar/Navbar";
 
-import { auth, db, myDb } from "../firebase/firebase";
+import { myDb } from "../firebase/firebase";
 import { Context } from "../Context/userContext";
 
 import styles from "./LandingPage.module.css";
@@ -24,69 +24,44 @@ const LandingPage = () => {
     "general",
   ];
 
-  const [user] = useAuthState(auth);
 
   const { userDetails, setUserDetails } = useContext(Context);
 
   const [categoriesChoosen, setCategoriesChoosen] = useState([]);
-  const [showCategoryWindow, setShowCategoryWindow] = useState(false);
+  const [showCategoryWindow, setShowCategoryWindow] = useState(true);
   const [newsData, setNewsData] = useState([]);
-  const [userID, setUserID] = useState(user?.uid);
+  const [userID, setUserID] = useState(sessionStorage.getItem("userID"));
 
-  console.log(userID);
-
-  useEffect(() => {
-    setUserID(user?.uid);
-    fetchUsername();
-    
-    setUserID(user?.uid);
+  useEffect(() => {    
     getTopicsInDatabase();
 
-    setUserID(user?.uid);
     let tempTopicsChoosen = sessionStorage.getItem("topicsChoosen");
     tempTopicsChoosen = tempTopicsChoosen ? tempTopicsChoosen.split(",") : [];
     
     setCategoriesChoosen(tempTopicsChoosen);
 
-    getNewsData(categoriesChoosen.length>0 ? categoriesChoosen : userDetails.topicsChoosen.split(","));
+    console.log(showCategoryWindow);
+    console.log(categoriesChoosen);
+
+  
+    getNewsData(categoriesChoosen.length>0 ? categoriesChoosen : tempTopicsChoosen);
 
   }, []);
 
-  const fetchUsername = async () => {
-    // Fetches the Username from firebase firestore
-    try {
-      const q = query(collection(db, "users"), where("uid", "==", user?.uid));
-      const doc = await getDocs(q);
-      console.log(doc)
-      const data = doc.docs[0].data();
-
-      setUserDetails({ ...userDetails, name: data.name, userId: user?.uid });
-      sessionStorage.setItem("name", data.name);
-      sessionStorage.setItem("userId", user?.uid);
-
-      return user?.uid;
-
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   const getTopicsInDatabase = async () => {
     // Gets the topics already stored in the database
-    if (user) {
+    if (userID) {
       onValue(
         refFromURL(
           myDb,
-          `https://assurenews25-default-rtdb.asia-southeast1.firebasedatabase.app/${userDetails.userId}`
+          `https://assurenews25-default-rtdb.asia-southeast1.firebasedatabase.app/${userID}`
         ),
         async (snapshot) => {
           const data = await snapshot.val();
-          console.log(data);
+          // console.log(data.categoriesChoosen);
 
           let categoriesAlreadyChoosen = data
             ? data.categoriesChoosen
-              ? data.categoriesChoosen
-              : []
             : [];
 
           console.log(categoriesAlreadyChoosen);
@@ -97,46 +72,74 @@ const LandingPage = () => {
           });
           sessionStorage.setItem("topicsChoosen", categoriesAlreadyChoosen);
 
-          if((userDetails.topicsChoosen === "") && (sessionStorage.getItem("topicsChoosen") == "")) setShowCategoryWindow(true);
+          if(categoriesAlreadyChoosen.length>0) {
+            setShowCategoryWindow(false)
+          }
         }
       );
     }
+    else {
+      console.log("No User")
+    }
   };
 
-  const getNewsData = (topics) => {
+
+
+  const getNewsData = async (topics) => {
     let currentData = [];
     let currentAPIs = [];
 
-    currentAPIs = topics.map((topic) => {
-      return `https://newsapi.org/v2/top-headlines?category=${topic}&apiKey=bbd4a97c4e77492ea5e40af254ebf2f9&language=en`;
-    });
-
-    Promise.all(
-      currentAPIs.map((api) => {
-        return fetch(api);
+    for(let i=0; i<topics.length; i++) {
+      await fetch(`https://newsapi.org/v2/top-headlines?category=${topics[i]}&apiKey=bbd4a97c4e77492ea5e40af254ebf2f9&language=en`)
+      .then(data => {
+        return data.json()
       })
-    )
-      .then((res) => {
-        return Promise.all(res.map((res) => res.json()));
+      .then(data => {
+        currentAPIs.push(data.articles);
+        console.log(data)
       })
-      .then((data) => data.map((item) => item.articles))
-      .then((data) => data.forEach((item) => currentData.push(...item)));
+    }
 
-    setNewsData(currentData);
-    console.log(newsData);
+    for(let i=0; i<currentAPIs.length; i++) {
+      currentData = [...currentData, ...currentAPIs[i]];
+    }
+
+    currentData = shuffle(currentData);
+    console.log(currentData)
+
+    // console.log(currentData.length);
+    setNewsData(currentData.length>0 ? currentData : newsData);
+    // console.log(newsData);
+    // console.log(newsData.length);
   };
+
+  function shuffle(array) {
+    let currentIndex = array.length,  randomIndex;
+  
+    // While there remain elements to shuffle...
+    while (currentIndex !== 0) {
+  
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+  
+    return array;
+  }
 
   const addCategoryToDatabase = (e) => {
     const categoryContainer = categoriesChoosen;
     if (!categoryContainer.includes(e.target.innerText)) {
       try {
-        const userId = userDetails.userId;
-        console.log(userId);
 
         set(
           refFromURL(
             myDb,
-            `https://assurenews25-default-rtdb.asia-southeast1.firebasedatabase.app/${userId}/categoriesChoosen`
+            `https://assurenews25-default-rtdb.asia-southeast1.firebasedatabase.app/${userID}/categoriesChoosen`
           ),
           [...categoryContainer, e.target.innerText]
         );
@@ -159,17 +162,18 @@ const LandingPage = () => {
           className={styles.LandingPage__categories}
           style={{
             display: `${
-              showCategoryWindow && userDetails.topicsChoosen.length <= 0
+              showCategoryWindow
                 ? ""
                 : "none"
             }`,
           }}
-        >
+        >{console.log(showCategoryWindow)}
           <CategoryPicker
             categories={categories}
             categoriesChoosen={categoriesChoosen}
             setCategoriesChoosen={setCategoriesChoosen}
             addCategoryToDatabase={addCategoryToDatabase}
+            setShowCategoryWindow={setShowCategoryWindow}
           />
         </div>
 
@@ -182,10 +186,6 @@ const LandingPage = () => {
                 ? categoriesChoosen.map((category) => 
                     <TopicCard topicName={category} />  
                   )
-                : userDetails.topicsChoosen.split(",").length > 0 
-                  ? userDetails.topicsChoosen.split(",").map((category) => 
-                      <TopicCard topicName={category} />
-                    )
                   : <h3>No topics selected</h3>
               }
             </div>

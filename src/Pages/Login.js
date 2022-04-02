@@ -27,10 +27,11 @@ function Login({setUserLoggedIn}) {
         userData.password,
       );
 
-      console.log(auth);
+      const userID = user.user.uid;
 
-      setUserDetails({...userDetails, email: userData.email});
+      setUserDetails({...userDetails, email: userData.email, userID: userID});
       sessionStorage.setItem("email", userData.email);
+      sessionStorage.setItem("userID", userID);
 
     } catch (error) {
       console.log(error)
