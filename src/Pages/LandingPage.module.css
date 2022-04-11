@@ -1,23 +1,27 @@
 .LandingPage__title {
-    margin: auto;
-    margin-top: 2rem;
-    width: 95%;
+  margin: auto;
+  margin-top: 2rem;
+  width: 95%;
 }
 
 .LandingPage__section {
-    margin: 2rem 0rem;
+  margin: 2rem 0rem;
 }
 
 .topicCards__Container {
-    display: flex;
-    align-items: center;
-    
-    margin: 1rem 0rem;
+  display: flex;
+  align-items: center;
+
+  margin: 1rem 0rem;
 }
 
 .NewsSection {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.NewsSection > div {
+  align-self: stretch;
 }

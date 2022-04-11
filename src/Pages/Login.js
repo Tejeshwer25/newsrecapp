@@ -1,65 +1,103 @@
-import {useState, useContext } from 'react';
-import {
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import {Navigate} from "react-router-dom"
+import { useState, useContext } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { Navigate } from "react-router-dom";
+import { refFromURL, onValue } from "firebase/database";
 
-import Form from '../Components/form/Form';
-import FormHero from '../Components/formHero/FormHero';
+import Form from "../Components/form/Form";
+import FormHero from "../Components/formHero/FormHero";
 import HomeNavigator from "../Components/homeNavigator/HomeNavigator";
 
-import { auth } from "../firebase/firebase";
-import {Context} from "../Context/userContext";
+import { auth, myDb } from "../firebase/firebase";
+import { Context } from "../Context/userContext";
 
-function Login({setUserLoggedIn}) {
-
+function Login({ setUserLoggedIn }) {
   const [userData, setUserData] = useState({
     email: "",
     password: "",
-  })
-  const {userDetails, setUserDetails} = useContext(Context);
+  });
+  const { userDetails, setUserDetails } = useContext(Context);
 
   const login = async () => {
     try {
       const user = await signInWithEmailAndPassword(
         auth,
         userData.email,
-        userData.password,
+        userData.password
       );
 
       const userID = user.user.uid;
 
-      setUserDetails({...userDetails, email: userData.email, userID: userID});
+      getTopicsInDatabase(userID);
+
+      setUserDetails({ ...userDetails, email: userData.email, userID: userID });
       sessionStorage.setItem("email", userData.email);
       sessionStorage.setItem("userID", userID);
-
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
+  };
 
+  const getTopicsInDatabase = async (userID) => {
+    // Gets the topics already stored in the database
+    if (userID) {
+      onValue(
+        refFromURL(
+          myDb,
+          `https://assurenews25-default-rtdb.asia-southeast1.firebasedatabase.app/${userID}`
+        ),
+        async (snapshot) => {
+          const data = await snapshot.val();
+
+          let categoriesAlreadyChoosen = data ? data.categoriesChoosen : [];
+
+          console.log(categoriesAlreadyChoosen);
+
+          setUserDetails({
+            ...userDetails,
+            topicsChoosen: categoriesAlreadyChoosen,
+          });
+          sessionStorage.setItem("topicsChoosen", categoriesAlreadyChoosen);
+
+          if (categoriesAlreadyChoosen.length <= 0) {
+            console.log("here");
+            return <Navigate replace to="/chooseAreasOfInterest" />;
+          }
+        }
+      );
+    } else {
+      console.log("No User");
+    }
   };
 
   return (
     <>
-    { userDetails.email === "" ? 
-      <>
-      <HomeNavigator />
+      {userDetails.email === "" ? (
+        <>
+          <HomeNavigator />
 
-      <div style={{
-        display: 'flex',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-      }}>
-        <Form userData={userData} setUserData={setUserData} setUserLoggedIn={setUserLoggedIn} onSubmit={login} formType="Login"/>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center",
+            }}
+          >
+            <Form
+              userData={userData}
+              setUserData={setUserData}
+              setUserLoggedIn={setUserLoggedIn}
+              onSubmit={login}
+              formType="Login"
+            />
 
-        <FormHero />
-      </div>
+            <FormHero />
+          </div>
+        </>
+      ) : (
+        <Navigate replace to="/welcome" />
+      )}
     </>
-    : 
-    <Navigate replace to="/welcome" />
-  }
-  </>
-  )
+  );
 }
 
 export default Login;

@@ -1,11 +1,12 @@
 import styles from "./CategoryPicker.module.css";
 
-const CategoryLabel = ({category, addCategoryToDatabase}) => {
+const CategoryLabel = ({ category, addCategoryToDatabase }) => {
   return (
     <div className={styles.categoryLabel} onClick={addCategoryToDatabase}>
-        {category}
+      {" "}
+      {category}
     </div>
-  )
-}
+  );
+};
 
 export default CategoryLabel;
