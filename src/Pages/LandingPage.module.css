@@ -15,6 +15,10 @@
   margin: 1rem 0rem;
 }
 
+.topicCards__Container a {
+  text-decoration: none;
+}
+
 .NewsSection {
   display: flex;
   flex-wrap: wrap;

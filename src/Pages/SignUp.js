@@ -69,7 +69,7 @@ const SignUp = ({ setUserLoggedIn }) => {
           </div>
         </>
       ) : (
-        <Navigate replace to="/welcome" />
+        <Navigate replace to="/chooseAreasOfInterest" />
       )}
     </>
   );

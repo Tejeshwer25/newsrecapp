@@ -1,31 +1,14 @@
 import { useState, useEffect } from "react";
-import { set, refFromURL } from "firebase/database";
 
 import Navbar from "../Components/navbar/Navbar";
-
-import { myDb } from "../firebase/firebase";
 
 import styles from "./LandingPage.module.css";
 import TopicCard from "../Components/topicCard/TopicCard";
 import Cards from "../Components/cards/Cards";
-import { Navigate } from "react-router-dom";
 
 const LandingPage = () => {
-  const categories = [
-    "business",
-    "technology",
-    "entertainment",
-    "sports",
-    "science",
-    "health",
-    "breaking-news",
-    "world",
-    "nation",
-  ];
-
   const [categoriesChoosen, setCategoriesChoosen] = useState([]);
   const [newsData, setNewsData] = useState([]);
-  const [userID, setUserID] = useState(sessionStorage.getItem("userID"));
 
   useEffect(() => {
     let tempTopicsChoosen = sessionStorage.getItem("topicsChoosen");

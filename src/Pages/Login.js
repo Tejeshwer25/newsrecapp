@@ -37,7 +37,7 @@ function Login({ setUserLoggedIn }) {
     }
   };
 
-  const getTopicsInDatabase = async (userID) => {
+  const getTopicsInDatabase = (userID) => {
     // Gets the topics already stored in the database
     if (userID) {
       onValue(
@@ -46,7 +46,7 @@ function Login({ setUserLoggedIn }) {
           `https://assurenews25-default-rtdb.asia-southeast1.firebasedatabase.app/${userID}`
         ),
         async (snapshot) => {
-          const data = await snapshot.val();
+          const data = snapshot.val();
 
           let categoriesAlreadyChoosen = data ? data.categoriesChoosen : [];
 
@@ -94,7 +94,7 @@ function Login({ setUserLoggedIn }) {
           </div>
         </>
       ) : (
-        <Navigate replace to="/welcome" />
+        <Navigate replace to="/chooseAreasOfInterest" />
       )}
     </>
   );

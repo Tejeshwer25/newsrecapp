@@ -1,65 +1,89 @@
 .categoryPicker {
-    position: absolute;
-    top: 5rem;
-    left: 50%;
-    transform: translateX(-50%);
+  position: absolute;
+  top: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
 
-    width: 40%;
+  width: 40%;
 
-    background-color: var(--bannerbackgroundColor);
-    border-radius: 10px;
+  background-color: var(--bannerbackgroundColor);
+  border-radius: 10px;
 }
 
 .categoryPicker__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-    border-bottom: 1px solid var(--blackColor);
-    padding: 2rem;
+  border-bottom: 1px solid var(--blackColor);
+  padding: 2rem;
 }
 
 .categoryPicker__header > h3 {
-    font-size: var(--heading3-fontSize);
-    font-weight: bold;
+  font-size: var(--heading3-fontSize);
+  font-weight: bold;
 }
 
 .categoryPicker__mainSecion {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
 
-    padding: 1rem 2rem;
+  padding: 1rem 2rem;
 }
-
 
 /* Category Label Styles */
 .categoryLabel {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-    min-width: 10rem;
+  min-width: 10rem;
 
-    border: 1px solid var(--navbarButtonBackgroundColor);
-    margin: 0.5rem 0rem;
-    padding: 0.5rem 0rem 0.5rem 0.5rem;
-    border-radius: 5px;
+  border: 1px solid var(--navbarButtonBackgroundColor);
+  margin: 0.5rem 0rem;
+  padding: 0.5rem 0rem 0.5rem 0.5rem;
+  border-radius: 5px;
 
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
 }
 .categoryLabel:hover {
-    background-color: var(--navbarButtonBackgroundColor);
+  background-color: var(--navbarButtonBackgroundColor);
 }
-.categoryLabel:hover{
-    color: var(--whiteColor);
+.categoryLabel:hover {
+  color: var(--whiteColor);
 }
 
 .categoryLabel {
-    font-size: var(--heading3-fontSize);
-    color: var(--formHeadingColor);
+  font-size: var(--heading3-fontSize);
+  color: var(--formHeadingColor);
 
-    margin-left: 1rem;
+  margin-left: 1rem;
+}
+
+.categoryPicker__buttons {
+  margin: 2rem;
+
+  display: flex;
+  justify-content: flex-end;
+}
+
+.categoryPicker__buttons > button {
+  padding: 0.5rem 1.25rem;
+  border: 1px solid var(--navbarButtonBackgroundColor);
+  border-radius: 5px;
+  background-color: var(--navbarButtonBackgroundColor);
+  color: var(--whiteColor);
+  outline: none;
+  cursor: pointer;
+  font-size: var(--paragraph-fontSize);
+  font-weight: bold;
+
+  transition: all 0.3s ease-in-out;
+}
+.categoryPicker__buttons > button:hover {
+  background-color: var(--whiteColor);
+  color: var(--navbarButtonBackgroundColor);
 }

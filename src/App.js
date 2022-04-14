@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useParams,
+} from "react-router-dom";
 
 import "./App.css";
 
@@ -9,6 +14,7 @@ import Register from "./Pages/SignUp";
 import LandingPage from "./Pages/LandingPage";
 import { Context } from "./Context/userContext";
 import CategoryPicker from "./Pages/CategoryPicker";
+import CategoryNews from "./Pages/CategoryNews";
 
 function App() {
   const [apiData, setApiData] = useState([]);
@@ -46,6 +52,8 @@ function App() {
               path="/chooseAreasOfInterest"
               element={<CategoryPicker />}
             />
+
+            <Route path="/welcome/:category" element={<CategoryNews />} />
 
             <Route
               exact
