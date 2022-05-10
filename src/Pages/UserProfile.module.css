@@ -1,0 +1,124 @@
+.UserProfile__header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  width: 50%;
+  margin: 3rem auto;
+}
+
+.UserProfile__header > img {
+  width: 5rem;
+  margin-right: 1rem;
+}
+
+.userProfile__settings {
+  margin: 0rem auto;
+  background-color: var(--bannerbackgroundColor);
+  padding: 1rem;
+
+  width: 50%;
+}
+
+.userProfile__settings > div > h3 {
+  padding: 0.75rem 0.5rem;
+  border-bottom: 1px solid var(--blackColor);
+  transition: all 0.2s ease-in-out;
+  font-size: var(--heading3-fontSize);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.userProfile__settings > div > h3:hover {
+  cursor: pointer;
+  background-color: var(--blackColor);
+  color: var(--whiteColor);
+}
+
+.userProfile__settings > div > h3 > span:last-child {
+  font-size: var(--heading1-fontSize);
+  font-weight: bolder;
+}
+
+.userProfile__sectionMenu {
+  background-color: var(--navbarButtonBackgroundColor);
+
+  padding: 1rem;
+}
+
+.userProfile__sectionMenu > input {
+  width: 100%;
+
+  border: none;
+  outline: none;
+  border-bottom: 2px solid var(--bannerbackgroundColor);
+  background-color: var(--navbarButtonBackgroundColor);
+  color: var(--whiteColor);
+
+  margin: 1rem 0rem;
+  padding: 0.5rem;
+
+  font-size: var(--paragraph-fontSize);
+}
+.userProfile__sectionMenu > input:hover {
+  border-color: var(--formHeadingColor);
+}
+.userProfile__sectionMenu > input:focus {
+  border-color: var(--formHeadingColor);
+}
+
+.userProfile__sectionMenu > button {
+  background-color: var(--formHeadingColor);
+  color: var(--whiteColor);
+
+  padding: 0.5rem 1rem;
+  margin: 1rem 0rem;
+  font-size: var(--paragraph-fontSize);
+  font-weight: bold;
+
+  border: none;
+  border-radius: 5px;
+
+  transition: all 0.3s ease-in-out;
+}
+.userProfile__sectionMenu > button:hover {
+  cursor: pointer;
+  background-color: var(--whiteColor);
+  color: var(--formHeadingColor);
+}
+
+.userProfile__sectionMenu > div {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+
+  margin: 1rem 0rem;
+}
+
+.userProfile__sectionMenu > div > div {
+  color: var(--whiteColor);
+  border: 1px solid var(--whiteColor);
+  border-radius: 5px;
+
+  padding: 0.5rem;
+  margin: 0.5rem;
+  font-size: var(--heading3-fontSize);
+
+  transition: all 0.3s ease-in-out;
+}
+.userProfile__sectionMenu > div > div:hover,
+.userProfile__sectionMenu > div > .topicAlreadyChoosen {
+  background-color: var(--whiteColor);
+  color: var(--blackColor);
+
+  cursor: pointer;
+}
+
+.userProfile__sectionMenu > div > h3 {
+  color: var(--whiteColor);
+}
+.userProfile__sectionMenu > div > h3 > span {
+  color: var(--formHeadingColor);
+}

@@ -57,7 +57,7 @@ const CategoryPickerPage = () => {
         />
       </div>
 
-      {sessionStorage.getItem("topicsChoosen") ? (
+      {sessionStorage.getItem("topicsChoosen") || userDetails.topicsChoosen ? (
         <Navigate replace to="/welcome" />
       ) : (
         ""

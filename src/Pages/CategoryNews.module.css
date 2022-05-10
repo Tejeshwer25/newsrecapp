@@ -3,6 +3,10 @@
   margin: 2rem auto;
 }
 
+.categoryNews > h2 {
+  margin: 1rem 0rem;
+}
+
 .categoryNews__container {
   display: flex;
   flex-wrap: wrap;
@@ -11,5 +15,6 @@
 }
 
 .categoryNews__container > div {
-  width: 32%;
+  width: 30%;
+  align-self: stretch;
 }

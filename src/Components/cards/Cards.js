@@ -1,9 +1,10 @@
 import styles from "./Cards.module.css";
 
 import noImage from "../../Assets/imageNotAvailable.png";
+import CardFooter from "./CardFooter";
 
 const Cards = ({ data }) => {
-  console.log(data.image);
+  const user = sessionStorage.getItem("email");
 
   return (
     <div className={styles.card}>
@@ -17,6 +18,8 @@ const Cards = ({ data }) => {
         <h3>{data.title}</h3>
         <p>{data.description}</p>
       </div>
+
+      {user ? <CardFooter /> : <></>}
     </div>
   );
 };

@@ -1,10 +1,6 @@
 import { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useParams,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import alanBtn from "@alan-ai/alan-sdk-web";
 
 import "./App.css";
 
@@ -15,6 +11,7 @@ import LandingPage from "./Pages/LandingPage";
 import { Context } from "./Context/userContext";
 import CategoryPicker from "./Pages/CategoryPicker";
 import CategoryNews from "./Pages/CategoryNews";
+import UserProfile from "./Pages/UserProfile";
 
 function App() {
   const [apiData, setApiData] = useState([]);
@@ -32,12 +29,26 @@ function App() {
       : [],
   });
 
+  const alanKey =
+    "793b26c9b3d44833fb10f94b0f1e38b12e956eca572e1d8b807a3e2338fdd0dc/stage";
+
   useEffect(() => {
     fetch(
       "https://gnews.io/api/v4/top-headlines?&token=b8c8fd5287a9a34e83e29418c797e06f&lang=en"
     )
       .then((response) => response.json())
       .then((data) => setApiData(data));
+  }, []);
+
+  useEffect(() => {
+    alanBtn({
+      key: alanKey,
+      onCommand: ({ command, articles }) => {
+        if (command === "newNews") {
+          console.log(articles);
+        }
+      },
+    });
   }, []);
 
   return (
@@ -52,6 +63,8 @@ function App() {
               path="/chooseAreasOfInterest"
               element={<CategoryPicker />}
             />
+
+            <Route exact path="/userProfile" element={<UserProfile />} />
 
             <Route path="/welcome/:category" element={<CategoryNews />} />
 
